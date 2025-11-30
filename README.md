@@ -12,7 +12,7 @@ Quant dev focused on research-grade Python tooling for market data ingestion, po
 | **MSN-Scraper** | pandas · requests · bs4 | ![Active](https://img.shields.io/badge/-active-brightgreen) | Unofficial MSN Finance API wrapper delivering quotes, ratios, financials, earnings, estimates, and ownership with multi-ticker support and structured parsers |
 | **Feature-Fetcher** | DuckDB · asyncio · TOML · pytest | ![In Progress](https://img.shields.io/badge/-in%20progress-yellow) | Daily append-only feature store pipeline for equities on Raspberry Pi-scale hardware, with CLI, registry-driven feature computation, and idempotent upserts |
 | **step_criterion** | statsmodels · patsy | ![Active](https://img.shields.io/badge/-active-brightgreen) | Educational stepwise regression toolkit exposing AIC/BIC/adj-R²/p-value selection for OLS/GLM with model averaging and detailed step tables |
-| **mgarchx** | NumPy · pandas | ![Experimental](https://img.shields.io/badge/-experimental-orange) | Early-stage multivariate GARCH modeling package with example notebooks and diagnostics |
+| **mgarchx** | NumPy · pandas | ![In Progress](https://img.shields.io/badge/-experimental-orange) | Early-stage multivariate GARCH modeling package with example notebooks and diagnostics |
 
 ---
 
@@ -20,7 +20,7 @@ Quant dev focused on research-grade Python tooling for market data ingestion, po
 
 | Project | Stack | Status | Description |
 |---------|-------|--------|-------------|
-| **Portfolio** | pandas · pyarrow · Streamlit · Pydantic | ![Active](https://img.shields.io/badge/-active-brightgreen) | Multi-broker portfolio tracker with append-only ledgers, EOD valuation via Yahoo, risk analytics (EWMA, shrinkage cov), reconciliation, and Streamlit dashboard/CLI |
+| **Portfolio** | pandas · pyarrow · Streamlit · Pydantic | ![Active](https://img.shields.io/badge/-active-brightgreen) | Multi-broker portfolio tracker with append-only ledgers, EOD valuation via Yahoo, risk analytics (EWMA, shrinkage cov), reconciliation, and Streamlit dashboard/CLI. Includes a local agentic NL interface (LangChain + function-calling LLM) for intent extraction, schema enforcement, auto-retry/self-correction, and deterministic portfolio operations. |
 | **quant-blend-optimizer** | pandas · scikit-learn · Streamlit | ![Active](https://img.shields.io/badge/-active-brightgreen) | Portfolio optimizer supporting EW/MVP/MDP/MSR, covariance shrinkage variants, CLI and Streamlit UI, and strategy blending/backtests with Yahoo/FRED data |
 | **quant-PE-rebalance** | scikit-learn · pandas · tqdm | ![Active](https://img.shields.io/badge/-active-brightgreen) | Modular ML strategy framework with feature engineering, walk-forward cross-validation, portfolio construction, metrics, and visualization for long-only/long-short equities |
 | **intraday_reversion** | pandas · Optuna · matplotlib | ![Active](https://img.shields.io/badge/-active-brightgreen) | Intraday mean reversion toolkit with session-specific price processing, regime detection (beta, rank corr, decile spread, Theil-Sen), Optuna hyperparam search, and blended backtests |
@@ -38,7 +38,7 @@ Quant dev focused on research-grade Python tooling for market data ingestion, po
 
 | Project | Stack | Status | Description |
 |---------|-------|--------|-------------|
-| **mgarchx** | NumPy · pandas | ![Experimental](https://img.shields.io/badge/-experimental-orange) | Prototype multivariate GARCH tooling for risk/vol modeling |
+| **mgarchx** | NumPy · pandas | ![In Progress](https://img.shields.io/badge/-experimental-orange) | Prototype multivariate GARCH tooling for risk/vol modeling |
 | **TLH+OpOl** | pydantic · pyproject | ![In Progress](https://img.shields.io/badge/-in%20progress-yellow) | Includes options overlay scaffolding for covered calls and CSPs |
 
 ---
