@@ -1,6 +1,71 @@
 # Mikael Hillman Pepin — Quant & Data Engineer
 
-Quant dev focused on research-grade Python tooling for market data ingestion, portfolio analytics, and systematic strategy prototyping, with a bias toward reproducible backtests, clean packaging, and lightweight dashboards.
+Quant dev focused on production-grade Python tooling for market data ingestion, portfolio analytics, and systematic strategy prototyping, with a bias toward AI workflows, clean packaging, and lightweight dashboards.
+
+---
+## My Homelab setup
+From network defense through coding to execution
+
+```mermaid
+graph LR
+  WAN((Internet))
+  IBKR((IBKR))
+  GDRIVE((Drive))
+  TS((Tailscale))
+
+  subgraph EDGE["Edge: MikroTik"]
+    P1["WAN"]
+    P2["VLAN10 Vault"]
+    P3["VLAN20 DMZ"]
+    P4["VLAN30 Lab"]
+  end
+
+  subgraph VAULT["High Trust"]
+    TRADING["Trading"]
+  end
+
+  subgraph DMZ["Low Trust"]
+    PI["Pi"]
+  end
+
+  subgraph LAB["Medium Trust"]
+    SW["Switch"]
+    MAIN["Main"]
+    AI["AI"]
+    NAS["NAS (future)"]
+  end
+
+  WAN --- P1
+  P2 --- TRADING
+  P3 --- PI
+  P4 --- SW
+  SW --- MAIN
+  SW --- AI
+  SW -.-> NAS
+
+  TRADING -->|Exec allowlist| IBKR
+  PI -->|Push| GDRIVE
+  MAIN -->|Fetch| GDRIVE
+  AI -->|Fetch| GDRIVE
+
+  TS ---|E2E| TRADING
+  TS ---|E2E| PI
+  TS ---|E2E| MAIN
+  TS ---|E2E| AI
+  MAIN -.->|SSH via TS| PI
+  PI -.->|ZMQ Single-Port| TRADING
+
+  %% Styling
+  classDef edge fill:#2a2a2a,stroke:#ff9800,stroke-width:2px,color:#ffffff;
+  classDef high fill:#153a2a,stroke:#4caf50,stroke-width:2px,color:#ffffff;
+  classDef low  fill:#3a1515,stroke:#f44336,stroke-width:2px,color:#ffffff;
+  classDef mid  fill:#15263a,stroke:#2196f3,stroke-width:2px,color:#ffffff;
+
+  class P1,P2,P3,P4 edge;
+  class TRADING high;
+  class PI low;
+  class SW,MAIN,AI,NAS mid;
+```
 
 ---
 
