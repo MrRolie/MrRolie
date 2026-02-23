@@ -30,8 +30,8 @@ graph LR
 
   subgraph LAB["Medium Trust"]
     SW["Switch"]
-    MAIN["Main"]
-    AI["AI"]
+    MAIN["Main Tower PC"]
+    AI["Local AI PC"]
     NAS["NAS (future)"]
   end
 
