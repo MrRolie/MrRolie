@@ -1,90 +1,136 @@
-# Mikael Hillman Pepin — Quant & AI Systems Engineer
+# Mikael Hillman Pepin
+**AI Systems Architect & Quantitative Engineer**
 
-Building **self-evolving agent systems** and quantitative infrastructure that go from data ingestion through model execution to trade automation—powered by local AI infrastructure and a complete MCP ecosystem.
-
----
-
-## AI & Agent Infrastructure
-
-### Local RAG System
-| Component | Stack | Description |
-|-----------|-------|-------------|
-| **repo_search** | Qdrant · BAAI/bge-m3 · hybrid | Semantic code/document search with dense embeddings + BM25 hybrid and reranking |
-| **mem0** | Qdrant · BAAI/bge-m3 | Agent memory system with semantic search for persistent context |
-
-### MCP Ecosystem
-| Server | Stack | Description |
-|--------|-------|-------------|
-| **mm-mcp** | FastMCP · mm-infra | Financial analytics tools (data, pricing, volatility, portfolio optimization) |
-| **repo_search_mcp** | MCP SDK | Semantic search over indexed codebases |
-| **mem0_mcp** | MCP SDK | Memory operations (add, search, update, delete) |
-| **traceforge** | TypeScript · Playwright · MCP | Reverse-engineer website APIs from browser traffic |
-
-### Agent Systems
-| Project | Stack | Description |
-|---------|-------|-------------|
-| **crime_investigator_system** | OpenCode · markdown artifacts | OpenCode-based investigation scaffold with specialist subagents (evidence-intake, timeline-analyst, hypothesis-challenger) |
+I architect domain-agnostic, self-evolving agent ecosystems that deliver asymmetric speed, scale, and cost-efficiency to complex data environments. My flagship implementation is a full-stack, autonomous quantitative trading lab. By engineering custom Model Context Protocol (MCP) toolchains and human-guided semantic memory networks, I build digital workforces capable of everything from multi-asset volatility modeling to unstructured data investigation.
 
 ---
 
-## Homelab & Infrastructure
+### Core Agent Infrastructure & The "Engine"
+*The generalized nervous system designed for rapid deployment, massive scale, and continuous, human-guided architectural evolution.*
 
-Isolated trading network with separate VLANs (Vault, DMZ, Lab), Tailscale for end-to-end encrypted remote access, and a dedicated trade execution node physically separated from the development environment.
+* **Semantic Memory & Context (Mem0 & RAG):** Built a persistent memory network utilizing Qdrant and BAAI/bge-m3 embeddings with BM25 hybrid reranking, allowing agents to maintain long-term context across discrete sessions.
+* **MCP Ecosystem Engineering:** Developed custom MCP servers (via FastMCP and MCP SDK) that grant LLM agents read/write capabilities over indexed codebases, active trading environments, and local file systems.
+* **Automated Reverse-Engineering (`traceforge`):** Engineered a TypeScript/Playwright agent tool to autonomously reverse-engineer undocumented website APIs from browser traffic, creating a scalable pipeline for alternative data ingestion.
 
----
+### Flagship Implementation: Autonomous Quant Lab (`mm-infra`)
+*A production-grade quantitative monorepo serving as the primary proving ground for my agentic infrastructure. The agents actively monitor, optimize, and write code to evolve the system under my guidance.*
 
-## Quantitative Infrastructure (mm-infra)
+* **Agent-Driven Options & Volatility:** Integrated complex pricing engines (Black-Scholes, Bjerksund-Stensland, FFT exotics) and jump-robust volatility estimators (GARCH, HAR) directly into the `mm-mcp` server for autonomous research and execution.
+* **Self-Optimizing Execution (`mm-ibkr-mcp`):** Deployed an Interactive Brokers execution interface (23+ tools) allowing agents to handle health checks, dynamic position sizing, and complex basket execution based on real-time slippage and PnL monitoring.
+* **Signal-to-Order Pipeline:** Built a deterministic Pydantic/ZMQ/FastAPI architecture that calculates positions and verifies risk parameters before execution.
 
-Monorepo with 8 namespace packages under `mm.*` for production-grade quantitative finance.
+### Proof of Flexibility: Unstructured Investigation Systems
+*Demonstrating the multi-purpose flexibility of the underlying agent scaffolding on highly unstructured, non-deterministic data.*
 
-### Data & Features
-| Package | Import | Status | Description |
-|---------|--------|--------|-------------|
-| **mm-data** | `mm.data` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Multi-source market data: Yahoo, MSN, ETFdb, FRED, WRDS |
-| **Feature-Fetcher** | CLI | ![Active](https://img.shields.io/badge/-active-brightgreen) | Daily feature pipeline: 5K equities, 300+ features, ArcticDB storage |
+* **Asynchronous Data Synthesis (`crime_investigator_system`):** Built an OpenCode-based framework utilizing interacting subagents (evidence-intake, timeline-analyst, hypothesis-challenger) to autonomously process, synthesize, and challenge hypotheses within complex, multi-threaded investigations.
 
-### Pricing & Volatility
-| Package | Import | Status | Description |
-|---------|--------|--------|-------------|
-| **mm-options** | `mm.quantlib.options` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Black-Scholes, Bjerksund-Stensland, eSSVI calibration, FFT exotics, full Greeks |
-| **mm-volatility** | `mm.quantlib.volatility` | ![Active](https://img.shields.io/badge/-active-brightgreen) | GARCH, GJR-GARCH, DCC, HAR models, jump-robust estimators |
+### Infrastructure, Security & Homelab
+*The physical and network foundation required to run local AI models and live trading nodes securely.*
 
-### Portfolio & Selection
-| Package | Import | Status | Description |
-|---------|--------|--------|-------------|
-| **mm-portfolio** | `mm.quantlib.portfolio` | ![Active](https://img.shields.io/badge/-active-brightgreen) | HRP, MVO, Black-Litterman, CVaR, ERC, covariance shrinkage |
-| **mm-selection** | `mm.quantlib.selection` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Stepwise regression with AIC/BIC/adj-R², model averaging |
-| **mm-core** | `mm.quantlib.core` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Zero curve bootstrapping, optimization engines, numerical primitives |
-
-### Strategies
-| Package | Import | Status | Description |
-|---------|--------|--------|-------------|
-| **mm-strategies** | `mm.strategies` | ![Active](https://img.shields.io/badge/-active-brightgreen) | PE rebalance, intraday mean reversion, signal trader, VRP harvesting |
+* **Air-Gapped Architecture:** Designed an isolated home network with dedicated VLANs (Vault, DMZ, Lab) and Tailscale end-to-end encryption.
+* **Hardware Segregation:** Enforced strict physical separation between the high-compute AI development/training environment and the deterministic, low-latency live trade execution nodes.
 
 ---
 
-## Trading & Execution
+## Main Projects in Detail
 
-| Project | Stack | Status | Description |
-|---------|-------|--------|-------------|
-| **mm-ibkr-mcp** | MCP · ib-insync · Pydantic | ![Active](https://img.shields.io/badge/-active-brightgreen) | Agent-facing IB execution MCP (23+ tools for health, positions, orders, basket execution) |
-| **mm-trading** | Pydantic · ZMQ · FastAPI | ![Active](https://img.shields.io/badge/-active-brightgreen) | Signal-to-order pipeline: position calculator, order planner, risk checker, executor |
-| **mm-portfolio-tracker** | Pydantic · Streamlit · MCP | ![Active](https://img.shields.io/badge/-active-brightgreen) | Append-only ledger, EOD valuation, EWMA volatility, Ledoit-Wolf covariance |
-| **mm-ibkr-gateway** | Docker Compose | ![Active](https://img.shields.io/badge/-active-brightgreen) | IB Gateway container deployment (live/paper) |
+### mm-infra (Quantitative Monorepo)
+A production-grade `uv` workspace with 8 namespace packages under `mm.*`:
 
----
+| Package | Purpose |
+|---------|---------|
+| **mm-data** | Multi-source market data fetching (Yahoo, MSN, ETFdb, FRED, WRDS) |
+| **mm-options** | Options pricing: Black-Scholes, Bjerksund-Stensland, eSSVI calibration, FFT exotics, full Greeks |
+| **mm-volatility** | Volatility models: GARCH, GJR-GARCH, DCC, HAR, jump-robust estimators |
+| **mm-portfolio** | Portfolio optimization: HRP, MVO, Black-Litterman, CVaR, ERC, covariance shrinkage |
+| **mm-selection** | Model selection: stepwise regression with AIC/BIC/adj-R2 |
+| **mm-core** | Primitives: zero curve bootstrapping, optimization engines, numerical utilities |
+| **mm-strategies** | Trading strategies: PE rebalance, intraday mean reversion, signal trader, VRP harvesting |
+| **mm-mcp** | MCP server exposing all above capabilities to AI agents |
 
-## Data Acquisition & Research
+All packages are vectorized (no loops over arrays), use `BlockedTimeSeriesSplit` to prevent data leakage, and are verified against reference implementations.
 
-| Project | Stack | Status | Description |
-|---------|-------|--------|-------------|
-| **traceforge** | TypeScript · Playwright | ![Experimental](https://img.shields.io/badge/-experimental-orange) | API reverse-engineering from browser traffic, OpenAPI/TypeScript generation |
+### crime_investigator_system
+An OpenCode-based crime investigation framework built on the same agent infrastructure used for quantitative work. It demonstrates that the same tools can handle highly unstructured, non-deterministic data analysis:
 
----
+* **Lead agent**: `crime-investigator` owns case strategy, caseboard maintenance, and final synthesis
+* **Specialist subagents**:
+  * `evidence-intake`: Extracts attributable facts and provenance from source material
+  * `visual-evidence-intake`: Reviews rendered pages and image crops when OCR is insufficient
+  * `timeline-analyst`: Normalizes chronology and surfaces contradictions
+  * `hypothesis-challenger`: Maintains competing theories and pressures them with disconfirming evidence
+  * `brief-writer`: Converts the caseboard into operational summaries or final briefings
 
-## Real Estate & Personal Finance
+All working state lives in markdown artifacts (`case-brief.md`, `evidence-log.md`, `timeline.md`, `hypotheses.md`), making the investigation process fully transparent and auditable.
 
-| Project | Stack | Status | Description |
-|---------|-------|--------|-------------|
-| **centris_analyser** | requests · bs4 · pandas | ![Active](https://img.shields.io/badge/-active-brightgreen) | Centris.ca scraper + Quebec plex investment analysis |
-| **condo-vs-house-cost-sim** | dataclasses · yaml · mypy | ![Active](https://img.shields.io/badge/-active-brightgreen) | PV comparison with deterministic and Monte Carlo simulations |
+### traceforge (Reverse Engineering Agent Tooling)
+A TypeScript MCP server for autonomous API discovery and reverse-engineering:
+
+* **Capture**: Uses Playwright to capture browser network traffic as users interact with any website
+* **Discovery**: Analyzes captured requests to identify data endpoints, separating useful data loads from page shell and analytics noise
+* **Lineage**: Traces values from the UI back to their source endpoints
+* **Replay**: Replays captured requests with optional mutations to probe parameter requirements and validation rules
+* **Export**: Generates OpenAPI 3.0.3 specs and TypeScript type definitions from captured samples
+
+This enables rapid ingestion of alternative data sources without manual API documentation parsing.
+
+### mm-ibkr-mcp (Execution Tooling)
+The canonical Interactive Brokers MCP server enabling agent-driven trading:
+
+* **23+ MCP tools** covering health monitoring, positions, orders, basket execution, and approvals
+* **Safety model**: `control.json` toggles and optional Telegram approval flow
+* **Persistence**: SQLite for audit logs, order history, trade intents, and position snapshots
+* **Safe defaults**: `orders_enabled=false`, `dry_run=true` — all production actions require explicit enablement
+
+Agents can query real-time positions, calculate position sizes, plan orders with transaction cost modeling, and execute with human-in-the-loop approval.
+
+### AI System Architecture
+
+The broader AI system that powers the agent infrastructure:
+
+```
+                    ┌───────────────────────────────────────┐
+                    │           Local LLM (lain)            │
+                    │     (self-hosted inference API)       │
+                    └───────────────┬───────────────────────┘
+                                    │
+          ┌─────────────────────────┼─────────────────────────┐
+          │                         │                         │
+          ▼                         ▼                         ▼
+┌─────────────────┐    ┌─────────────────────┐    ┌──────────────────┐
+│   repo_search   │    │       mem0          │    │   MCP Servers    │
+│  (Code Search)  │    │  (Agent Memory)     │    │  (Tool Access)   │
+└────────┬────────┘    └──────────┬──────────┘    └────────┬─────────┘
+         │                        │                        │
+         ▼                        ▼                        ▼
+┌─────────────────┐    ┌─────────────────────┐    ┌──────────────────┐
+│  BAAI/bge-m3    │    │    BAAI/bge-m3      │    │  mm-mcp, ibkr,   │
+│  (Embeddings)   │    │    (Embeddings)     │    │  repo_search,    │
+└────────┬────────┘    └──────────┬──────────┘    │  mem0, etc.      │
+         │                        │               └──────────────────┘
+         └───────────┬────────────┘
+                     │
+                     ▼
+         ┌─────────────────────────┐
+         │    Qdrant Vector Store  │
+         │  (repo_index_chunks_v2) │
+         │     (mem0_memories)     │
+         └─────────────────────────┘
+```
+
+**Components:**
+
+* **lain**: Self-hosted local LLM inference via an OpenAI-compatible API (`http://127.0.0.1:8080/v1`). Powers all local model interactions without relying on external APIs.
+
+* **mem0**: Agent memory system with semantic search. Agents can store experiences, retrieve relevant past context, update or delete memories. Uses Qdrant for vector storage with BAAI/bge-m3 embeddings (1024 dimensions).
+
+* **repo_search**: Semantic code/document search over indexed repositories. Uses BAAI/bge-m3 for dense embeddings combined with BM25 sparse search for hybrid retrieval. Includes BAAI/bge-reranker-v2-m3 for improved result ranking. Indexed content lives in Qdrant collection `repo_index_chunks_v2`.
+
+* **MCP Servers**: Model Context Protocol servers providing structured tool access:
+  * `mm-mcp`: Financial analytics (data, pricing, volatility, portfolio)
+  * `ibkr-execution`: Trading execution via IB Gateway
+  * `repo_search_mcp`: Codebase semantic search
+  * `mem0_mcp`: Memory operations
+  * `traceforge`: API reverse-engineering
+
+The entire system runs locally — no external API dependencies for core functionality. This provides privacy, cost control (no per-token fees), and low-latency inference critical for trading applications.
