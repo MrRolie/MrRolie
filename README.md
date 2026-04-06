@@ -1,144 +1,90 @@
-# Mikael Hillman Pepin — Quant & Data Engineer
+# Mikael Hillman Pepin — Quant & AI Systems Engineer
 
-Quant dev focused on production-grade Python tooling for market data ingestion, portfolio analytics, and systematic strategy prototyping, with a bias toward AI workflows, clean packaging, and lightweight dashboards.
-
----
-## My Homelab setup
-From network defense through coding to execution
-
-```mermaid
-graph LR
-  WAN((Internet))
-  IBKR((IBKR))
-  GDRIVE((Drive))
-  TS((Tailscale))
-
-  subgraph EDGE["Edge: MikroTik"]
-    P1["WAN"]
-    P2["VLAN10 Vault"]
-    P3["VLAN20 DMZ"]
-    P4["VLAN30 Lab"]
-  end
-
-  subgraph VAULT["High Trust"]
-    TRADING["Trading"]
-  end
-
-  subgraph DMZ["Low Trust"]
-    PI["Pi"]
-  end
-
-  subgraph LAB["Medium Trust"]
-    SW["Switch"]
-    MAIN["Main Tower PC"]
-    AI["Local AI PC"]
-    NAS["NAS (future)"]
-  end
-
-  WAN --- P1
-  P2 --- TRADING
-  P3 --- PI
-  P4 --- SW
-  SW --- MAIN
-  SW --- AI
-  SW -.-> NAS
-
-  TRADING -->|Exec allowlist| IBKR
-  PI -->|Push| GDRIVE
-  MAIN -->|Fetch| GDRIVE
-  AI -->|Fetch| GDRIVE
-
-  TS ---|E2E| TRADING
-  TS ---|E2E| PI
-  TS ---|E2E| MAIN
-  TS ---|E2E| AI
-  MAIN -.->|SSH via TS| PI
-  PI -.->|ZMQ Single-Port| TRADING
-
-  %% Styling
-  classDef edge fill:#2a2a2a,stroke:#ff9800,stroke-width:2px,color:#ffffff;
-  classDef high fill:#153a2a,stroke:#4caf50,stroke-width:2px,color:#ffffff;
-  classDef low  fill:#3a1515,stroke:#f44336,stroke-width:2px,color:#ffffff;
-  classDef mid  fill:#15263a,stroke:#2196f3,stroke-width:2px,color:#ffffff;
-
-  class P1,P2,P3,P4 edge;
-  class TRADING high;
-  class PI low;
-  class SW,MAIN,AI,NAS mid;
-```
+Building **self-evolving agent systems** and quantitative infrastructure that go from data ingestion through model execution to trade automation—powered by local AI infrastructure and a complete MCP ecosystem.
 
 ---
 
-## 📊 Data & Modeling Libraries
+## AI & Agent Infrastructure
+
+### Local RAG System
+| Component | Stack | Description |
+|-----------|-------|-------------|
+| **repo_search** | Qdrant · BAAI/bge-m3 · hybrid | Semantic code/document search with dense embeddings + BM25 hybrid and reranking |
+| **mem0** | Qdrant · BAAI/bge-m3 | Agent memory system with semantic search for persistent context |
+
+### MCP Ecosystem
+| Server | Stack | Description |
+|--------|-------|-------------|
+| **mm-mcp** | FastMCP · mm-infra | Financial analytics tools (data, pricing, volatility, portfolio optimization) |
+| **repo_search_mcp** | MCP SDK | Semantic search over indexed codebases |
+| **mem0_mcp** | MCP SDK | Memory operations (add, search, update, delete) |
+| **traceforge** | TypeScript · Playwright · MCP | Reverse-engineer website APIs from browser traffic |
+
+### Agent Systems
+| Project | Stack | Description |
+|---------|-------|-------------|
+| **crime_investigator_system** | OpenCode · markdown artifacts | OpenCode-based investigation scaffold with specialist subagents (evidence-intake, timeline-analyst, hypothesis-challenger) |
+
+---
+
+## Homelab & Infrastructure
+
+Isolated trading network with separate VLANs (Vault, DMZ, Lab), Tailscale for end-to-end encrypted remote access, and a dedicated trade execution node physically separated from the development environment.
+
+---
+
+## Quantitative Infrastructure (mm-infra)
+
+Monorepo with 8 namespace packages under `mm.*` for production-grade quantitative finance.
+
+### Data & Features
+| Package | Import | Status | Description |
+|---------|--------|--------|-------------|
+| **mm-data** | `mm.data` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Multi-source market data: Yahoo, MSN, ETFdb, FRED, WRDS |
+| **Feature-Fetcher** | CLI | ![Active](https://img.shields.io/badge/-active-brightgreen) | Daily feature pipeline: 5K equities, 300+ features, ArcticDB storage |
+
+### Pricing & Volatility
+| Package | Import | Status | Description |
+|---------|--------|--------|-------------|
+| **mm-options** | `mm.quantlib.options` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Black-Scholes, Bjerksund-Stensland, eSSVI calibration, FFT exotics, full Greeks |
+| **mm-volatility** | `mm.quantlib.volatility` | ![Active](https://img.shields.io/badge/-active-brightgreen) | GARCH, GJR-GARCH, DCC, HAR models, jump-robust estimators |
+
+### Portfolio & Selection
+| Package | Import | Status | Description |
+|---------|--------|--------|-------------|
+| **mm-portfolio** | `mm.quantlib.portfolio` | ![Active](https://img.shields.io/badge/-active-brightgreen) | HRP, MVO, Black-Litterman, CVaR, ERC, covariance shrinkage |
+| **mm-selection** | `mm.quantlib.selection` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Stepwise regression with AIC/BIC/adj-R², model averaging |
+| **mm-core** | `mm.quantlib.core` | ![Active](https://img.shields.io/badge/-active-brightgreen) | Zero curve bootstrapping, optimization engines, numerical primitives |
+
+### Strategies
+| Package | Import | Status | Description |
+|---------|--------|--------|-------------|
+| **mm-strategies** | `mm.strategies` | ![Active](https://img.shields.io/badge/-active-brightgreen) | PE rebalance, intraday mean reversion, signal trader, VRP harvesting |
+
+---
+
+## Trading & Execution
 
 | Project | Stack | Status | Description |
 |---------|-------|--------|-------------|
-| **Finance-Utils** | pandas · requests · yfinance · SQLite | ![Active](https://img.shields.io/badge/-active-brightgreen) | Modular Yahoo Finance and index/CIK client with ticker scraping, fundamentals/prices retrieval across intervals, and database helpers for durable local datasets |
-| **MSN-Scraper** | pandas · requests · bs4 | ![Active](https://img.shields.io/badge/-active-brightgreen) | Unofficial MSN Finance API wrapper delivering quotes, ratios, financials, earnings, estimates, and ownership with multi-ticker support and structured parsers |
-| **Feature-Fetcher** | DuckDB · asyncio · TOML · pytest | ![In Progress](https://img.shields.io/badge/-in%20progress-yellow) | Daily append-only feature store pipeline for equities on Raspberry Pi-scale hardware, with CLI, registry-driven feature computation, and idempotent upserts |
-| **step_criterion** | statsmodels · patsy | ![Active](https://img.shields.io/badge/-active-brightgreen) | Educational stepwise regression toolkit exposing AIC/BIC/adj-R²/p-value selection for OLS/GLM with model averaging and detailed step tables |
-| **mgarchx** | NumPy · pandas | ![In Progress](https://img.shields.io/badge/-experimental-orange) | Early-stage multivariate GARCH modeling package with example notebooks and diagnostics |
+| **mm-ibkr-mcp** | MCP · ib-insync · Pydantic | ![Active](https://img.shields.io/badge/-active-brightgreen) | Agent-facing IB execution MCP (23+ tools for health, positions, orders, basket execution) |
+| **mm-trading** | Pydantic · ZMQ · FastAPI | ![Active](https://img.shields.io/badge/-active-brightgreen) | Signal-to-order pipeline: position calculator, order planner, risk checker, executor |
+| **mm-portfolio-tracker** | Pydantic · Streamlit · MCP | ![Active](https://img.shields.io/badge/-active-brightgreen) | Append-only ledger, EOD valuation, EWMA volatility, Ledoit-Wolf covariance |
+| **mm-ibkr-gateway** | Docker Compose | ![Active](https://img.shields.io/badge/-active-brightgreen) | IB Gateway container deployment (live/paper) |
 
 ---
 
-## 💼 Portfolio & Trading Systems
+## Data Acquisition & Research
 
 | Project | Stack | Status | Description |
 |---------|-------|--------|-------------|
-| **Portfolio** | pandas · pyarrow · Streamlit · Pydantic | ![Active](https://img.shields.io/badge/-active-brightgreen) | Multi-broker portfolio tracker with append-only ledgers, EOD valuation via Yahoo, risk analytics (EWMA, shrinkage cov), reconciliation, and Streamlit dashboard/CLI. Includes a local agentic NL interface (LangChain + function-calling LLM) for intent extraction, schema enforcement, auto-retry/self-correction, and deterministic portfolio operations. |
-| **quant-blend-optimizer** | pandas · scikit-learn · Streamlit | ![Active](https://img.shields.io/badge/-active-brightgreen) | Portfolio optimizer supporting EW/MVP/MDP/MSR, covariance shrinkage variants, CLI and Streamlit UI, and strategy blending/backtests with Yahoo/FRED data |
-| **quant-PE-rebalance** | scikit-learn · pandas · tqdm | ![Active](https://img.shields.io/badge/-active-brightgreen) | Modular ML strategy framework with feature engineering, walk-forward cross-validation, portfolio construction, metrics, and visualization for long-only/long-short equities |
-| **intraday_reversion** | pandas · Optuna · matplotlib | ![Active](https://img.shields.io/badge/-active-brightgreen) | Intraday mean reversion toolkit with session-specific price processing, regime detection (beta, rank corr, decile spread, Theil-Sen), Optuna hyperparam search, and blended backtests |
-| **TLH+OpOl** | pydantic · pyproject | ![In Progress](https://img.shields.io/badge/-in%20progress-yellow) | Tax-loss harvesting simulator with specific-ID lot accounting, mock price generator, Canadian tax hooks, and scaffolding for covered-call/cash-secured-put overlays driven by YAML config |
-| **Brandt_Portfolio** | finance_utils | ![In Progress](https://img.shields.io/badge/-in%20progress-yellow) | Data ingestor populating a SQLite DB of prices and selected fundamentals for a diversified ticker set to support Brandt-style portfolio experiments |
-| **Algo-Trading_Statistical-Arbitrage** | yfinance · pandas · sqlite | ![Experimental](https://img.shields.io/badge/-experimental-orange) | Scripted pipeline to scrape current S&P 500 membership and maintain an adjusted-close SQLite dataset for stat-arb research |
-| **Short** | Python notebooks | ![Experimental](https://img.shields.io/badge/-experimental-orange) | Notebooks analyzing short interest, dilution tracking, and backtests on related signals |
-| **Sentiment-Factors** | Reddit API utilities | ![Experimental](https://img.shields.io/badge/-experimental-orange) | Configurable Reddit crawler setup for sentiment-based factor construction and rate-limit inspection |
-| **Various_Algo_tests** | notebooks · misc scripts | ![Archived](https://img.shields.io/badge/-archived-lightgrey) | Sandbox of exploratory notebooks (covariance weighting, MSN API trials, IBKR client experiments) and legacy algo tests |
-| **quadrature-options-pricer** | NumPy | ![Experimental](https://img.shields.io/badge/-experimental-orange) | Research code for Bermudan/American/European option pricing via quadrature-based backward induction with benchmarking notebooks and scripts |
+| **traceforge** | TypeScript · Playwright | ![Experimental](https://img.shields.io/badge/-experimental-orange) | API reverse-engineering from browser traffic, OpenAPI/TypeScript generation |
 
 ---
 
-## 📈 Options & Volatility Research
+## Real Estate & Personal Finance
 
 | Project | Stack | Status | Description |
 |---------|-------|--------|-------------|
-| **mgarchx** | NumPy · pandas | ![In Progress](https://img.shields.io/badge/-experimental-orange) | Prototype multivariate GARCH tooling for risk/vol modeling |
-| **TLH+OpOl** | pydantic · pyproject | ![In Progress](https://img.shields.io/badge/-in%20progress-yellow) | Includes options overlay scaffolding for covered calls and CSPs |
-
----
-
-## 🏠 Real Estate & Personal Finance
-
-| Project | Stack | Status | Description |
-|---------|-------|--------|-------------|
-| **centris_analyser** | requests · bs4 · pandas · rapidfuzz | ![Active](https://img.shields.io/badge/-active-brightgreen) | Dual repo: high-speed Centris.ca scraper (overview + detailed parallel scraping, filtering, export) and educational analysis toolkit for Quebec plex deals with modeling notebooks and config-driven paths |
-| **condo-vs-house-cost-sim** | dataclasses · yaml · mypy · pytest | ![Active](https://img.shields.io/badge/-active-brightgreen) | Library/CLI to compare condo vs house ownership PV using deterministic and Monte Carlo simulations with economic shocks, event modeling, and reporting/notebook examples |
-
----
-
-## 🎓 Academic & Coursework
-
-| Project | Stack | Status | Description |
-|---------|-------|--------|-------------|
-| **HEC_Team** | Python notebooks | ![Archived](https://img.shields.io/badge/-archived-lightgrey) | Graduate quantitative investing assignments with extensive feature engineering documentation, sector-neutral ML models, and walk-forward validation for S&P 500 strategies |
-| **Eff_frontier_max_sharpe_GP_TP1** | cvxpy notebooks | ![Archived](https://img.shields.io/badge/-archived-lightgrey) | Portfolio management class project optimizing efficient frontier/Sharpe via conic solvers with Anaconda environment specs |
-
----
-
-## 🔧 Data & Compliance Utilities
-
-| Project | Stack | Status | Description |
-|---------|-------|--------|-------------|
-| **Institutional** | yfinance · requests · bs4 · openpyxl | ![Experimental](https://img.shields.io/badge/-experimental-orange) | SEC data helpers to fetch insider/holding data, scrape CIKs, and enrich institutional datasets, plus TSX ticker retrieval routines |
-| **Other/13F_Portfolio** | BeautifulSoup | ![Archived](https://img.shields.io/badge/-archived-lightgrey) | Form 13F XML parser and portfolio analyzer classes for recent filing changes |
-| **Share_liquidation** | Python notebook | ![Incomplete](https://img.shields.io/badge/-incomplete-red) | Prototype notebook to retrieve and study share liquidation filings |
-
----
-
-## 🛠 Personal & Misc Tools
-
-| Project | Stack | Status | Description |
-|---------|-------|--------|-------------|
-| **Spotify** | spotipy · pandas | ![Complete](https://img.shields.io/badge/-complete-blue) | Script to pull and export liked songs via Spotify API to Excel |
-| **ticker_wallpaper** | HTML · CSS · JS | ![Complete](https://img.shields.io/badge/-complete-blue) | Browser-based animated ticker "wallpaper" with configurable board JSON and media previews |
+| **centris_analyser** | requests · bs4 · pandas | ![Active](https://img.shields.io/badge/-active-brightgreen) | Centris.ca scraper + Quebec plex investment analysis |
+| **condo-vs-house-cost-sim** | dataclasses · yaml · mypy | ![Active](https://img.shields.io/badge/-active-brightgreen) | PV comparison with deterministic and Monte Carlo simulations |
