@@ -1,8 +1,8 @@
 # Mikael Hillman-Pépin
 
-I design the systems *around* AI agents — how work divides between humans and machines, how knowledge persists across sessions, how failures stay contained, and how you establish that work is actually correct.
+I build software that automates real work end to end, with checks that prove the results. AI coding agents write much of the code under my design.
 
-Most of my attention goes to the last one. An agent reporting success is making a claim, not delivering a result, and the distance between those two is where real systems fail quietly. What follows is what I run on. Each rule carries the derivation that would justify retiring it.
+Most of my attention goes to verification. An agent reporting success is making a claim, not delivering a result, and the distance between those two is where real systems fail quietly. What follows is what I run on. Each rule carries the derivation that would justify retiring it.
 
 ## Working rules
 
@@ -44,12 +44,15 @@ Most of it is private. Listed together because they are the same problem in diff
 
 ## Public repos
 
-Three worth opening:
+Four worth opening:
 
+- **[housing-decision-engine](https://github.com/MrRolie/housing-decision-engine)** — a present-value engine comparing renting, a condo and a house on a net-wealth basis (Québec/Canada), with seeded Monte Carlo uncertainty. Every default input is sourced and dated, or explicitly marked uncited, and an automated check fails when a dated figure goes stale; when the data cannot decide, the verdict says so.
 - **[mm-ibkr-mcp](https://github.com/MrRolie/mm-ibkr-mcp)** — an Interactive Brokers MCP server: the tool surface an agent actually gets, with approval gating and profile validation between a request and anything that touches an account.
 - **[netjsonmon](https://github.com/MrRolie/netjsonmon)** — a CLI for discovering and ranking JSON API endpoints from real browser traffic. Built for inspecting network APIs, persisting captures, and finding the endpoints that actually carry data.
 - **[step_criterion](https://github.com/MrRolie/step_criterion)** — a small published Python package for stepwise model selection, deliberately explicit about the statistical limitations of the method it implements.
 
 ## Background
 
-Actuarial science and financial engineering. Finance trains you to reason about uncertainty, incentives, evidence, and consequences that are real — which turns out to be reasonable preparation for building systems whose failure modes are not yet charted.
+Mathematics (B.Sc., Université de Montréal), actuarial work (ACIA) and financial engineering (M.Sc., HEC Montréal, in progress). Finance trains you to reason about uncertainty, incentives, evidence, and consequences that are real, which turns out to be reasonable preparation for building systems whose failure modes are not yet charted.
+
+Contact: [LinkedIn](https://www.linkedin.com/in/mikael-hillman-p%C3%A9pin-aica-35250223b/)
