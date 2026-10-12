@@ -28,7 +28,7 @@ Two structural commitments do most of the work:
 
 **Rules are durable artifacts, not habits.** Each is written to a fixed form — what to do, what makes it fire, and the derivation it came from — so that the derivation doubles as the retirement test. A rule nobody can trace is a rule nobody can delete.
 
-Every pull request gets an automatic review from a different model family before I look at it; design decisions on consequential paths get a second cross-family pass. The reason is the rule above: a reviewer sharing the author's context shares the author's blind spots.
+On my largest system, the quantitative infrastructure, every pull request now gets a deterministic verdict computed by code, with no LLM making the call. Since late September 2026, every merge has gone through a command that refuses to merge without that verdict. Over 650 of its pull requests were also reviewed before merging by a model from a different vendor, for the reason in the last working rule: a reviewer sharing the author's context shares the author's blind spots.
 
 ## What I'm building
 
@@ -44,12 +44,15 @@ Most of it is private. Listed together because they are the same problem in diff
 
 ## Public repos
 
-Four worth opening:
+Five worth opening:
 
+- **[camunda-claim-triage](https://github.com/MrRolie/camunda-claim-triage)** — one model step inside a Camunda 8 process. Claude reads a synthetic insurance claim and extracts its fields, and deterministic code checks them. A person then approves or rejects the claim in Tasklist; the model has no path to that decision.
 - **[housing-decision-engine](https://github.com/MrRolie/housing-decision-engine)** — a present-value engine comparing renting, a condo and a house on a net-wealth basis (Québec/Canada), with seeded Monte Carlo uncertainty. Every default input is sourced and dated, or explicitly marked uncited, and an automated check fails when a dated figure goes stale; when the data cannot decide, the verdict says so.
 - **[mm-ibkr-mcp](https://github.com/MrRolie/mm-ibkr-mcp)** — an Interactive Brokers MCP server: the tool surface an agent actually gets, with approval gating and profile validation between a request and anything that touches an account.
 - **[netjsonmon](https://github.com/MrRolie/netjsonmon)** — a CLI for discovering and ranking JSON API endpoints from real browser traffic. Built for inspecting network APIs, persisting captures, and finding the endpoints that actually carry data.
 - **[step_criterion](https://github.com/MrRolie/step_criterion)** — a small published Python package for stepwise model selection, deliberately explicit about the statistical limitations of the method it implements.
+
+Also public, outside GitHub: **[Market Board](https://steamcommunity.com/sharedfiles/filedetails/?id=3815397645)**, a free stock-market wallpaper for Wallpaper Engine. It colours each stock by how unusual today's move is for that stock, rather than by its raw percentage change.
 
 ## Background
 
