@@ -40,7 +40,6 @@ Most of it is private. Listed together because they are the same problem in diff
 - **Actuarial computation** — life-contingency math where the jurisdictional basis is part of the answer, and internal consistency identities must hold before any number is reported.
 - **Spreadsheet conversion** — turning opaque workbooks into code, with the original workbook as the oracle: nothing counts as correct until the two agree.
 - **Editorial drafting** — nothing is published without my approval of the exact text; the hard part is verifying claims whose readers have no way to check them.
-- **A consumer conversational product** — behaviour definitions hot-reload in production, so safety has to be structural rather than a deploy-time gate.
 
 ## Public repos
 
